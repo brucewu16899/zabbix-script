@@ -46,8 +46,8 @@ date_default_timezone_set("Asia/Tokyo");
 $response = $rds->describe_events($opt);
 if(!$response->isOK())
 {
-  // output_log(" [" . $response->body->Errors->Error->Code . "] " . $response->body->Errors->Error->Message,LOG_FILE);
-  echo " [" . $response->body->Errors->Error->Code . "] " . $response->body->Errors->Error->Message;
+    // output_log("[Error] Failed to describe_events() -" . $response->body->Errors->Error->Code . "- " . $response->body->Errors->Error->Message, LOG_FILE);
+  echo "[Error] -" . $response->body->Errors->Error->Code . "] " . $response->body->Errors->Error->Message;
   exit(1);
 }
 
