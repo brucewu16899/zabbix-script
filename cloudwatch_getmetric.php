@@ -15,8 +15,6 @@
  *
  * config.inc.php内でproduction/develope環境の切り替えとアクセスキーとシークレットキー等の情報を指定
  *
- * パラメータに指定するメトリクス名等はAWSコンソールのCloudWatchを参照
- *
  * SDK仕様は以下
  * http://docs.aws.amazon.com/AWSSDKforPHP/latest/#m=AmazonCloudWatch/get_metric_statistics
  */
@@ -41,7 +39,7 @@ $opt            = array("Dimensions" => array(array("Name" => $name,"Value" => $
 
 // Instantiate the class
 $cw = new AmazonCloudWatch();
-// リージョンを設定(東京)
+// リージョンを東京に設定
 $cw->set_region(AmazonCloudWatch::REGION_APAC_NE1);
 date_default_timezone_set("Asia/Tokyo");
 
