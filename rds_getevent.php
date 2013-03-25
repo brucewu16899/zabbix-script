@@ -38,7 +38,7 @@ var_dump($opt);
 
 // Instantiate the class
 $rds = new AmazonRDS();
-// リージョンを設定(東京)
+// リージョンを東京に設定
 $rds->set_region(AmazonRDS::REGION_APAC_NE1);
 date_default_timezone_set("Asia/Tokyo");
 
@@ -46,19 +46,22 @@ date_default_timezone_set("Asia/Tokyo");
 $response = $rds->describe_events($opt);
 if(!$response->isOK())
 {
-    // output_log("[Error] Failed to describe_events() -" . $response->body->Errors->Error->Code . "- " . $response->body->Errors->Error->Message, LOG_FILE);
-  echo "[Error] -" . $response->body->Errors->Error->Code . "] " . $response->body->Errors->Error->Message;
-  exit(1);
+    echo "[Error] -" . $response->body->Errors->Error->Code . "- " . $response->body->Errors->Error->Message;
+    exit(1);
 }
 
 $data = $response->body->DescribeEventsResult->Events->Event;
 
-// zabbix2.0以降でしか改行を含む値は正しく表示されない(zabbix 1.8系は改行には対応していない)
+/** 
+ * zabbix2.0以降でしか改行を含む値は正しく表示されない(zabbix 1.8系は改行には対応していない)
+ */
+
 // zabbix2.0以降
 // $event_value = "";
 // foreach ($data as $event) {
 //     $event_value .= $event->Date." ".$event->Message.PHP_EOL;
 // }
+
 // zabbix1.8系
 $event_value = 0;
 foreach ($data as $event)
